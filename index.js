@@ -1,6 +1,7 @@
 const express = require("express");
 //import products from "./Data.js";
 const cors = require('cors');
+const multer = require('multer')
  //const products = require('./Data')
 const dotenv = require("dotenv");
  //const userRoute = require("./routes/user");
@@ -14,13 +15,24 @@ const DataimportRoute = require("./models/Dataimport")
 const productRoute = require("./routes/product");
 const { notFound, errorHandler } = require("./Middleware/Error");
 const authRoute = require("./routes/auth")
-
-
-
+const orderRoute = require("./routes/order")
+const uploadRoute = require("./routes/upload")
 
 const app = express();
 
 dotenv.config();
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'images/')
+    },
+    filename: (req, file, cb) => {
+      cb(null, file.originalname)
+    },
+  })
+  
+  const upload = multer({ storage: storage })
+  
 // Configurer la connexion mongoose par défaut  
 // const mongoDB = "mongodb+srv://mya:w5EGjKeWSyjeY6VC@cluster0.y5vgdxc.mongodb.net/myashop?retryWrites=true&w=majority";
 
@@ -31,6 +43,10 @@ mongoose.connect(process.env.MONGO_URL)
     });
 
 app.use(cors());
+
+// app.post('/image', upload.single('file'), function (req, res) {
+//     res.json({})
+//   })
 
 app.use(express.json());
  app.use(express.urlencoded({extended: false}));
@@ -43,6 +59,10 @@ app.use(express.json());
 app.use("/api/import", DataimportRoute);
 app.use("/api/products", productRoute);
 app.use("/api/users", authRoute);
+app.use('/api/orders', orderRoute);
+app.use('/api/upload', uploadRoute);
+
+
 
 
 //ERROR HANDLER

@@ -10,6 +10,18 @@ router.get ("/", asyncHandler(async(req,res) =>{
 })
 );
 
+// //CREATE
+ router.post("/post", async (req, res) => {
+ const newProduct = new Product(req.body);
+
+ try {
+    const savedProduct = await newProduct.save();
+    res.status(200).json(savedProduct);
+ } catch (err) {
+    res.status(500).json(err); 
+ }
+ });
+
 //GET  PRODUCT ID
 router.get ("/:id", asyncHandler(async(req,res) =>{
     const product = await Product.findById({_id: req.params.id})
@@ -24,7 +36,32 @@ router.get ("/:id", asyncHandler(async(req,res) =>{
    );
 
 
+   // //Update
+   router.put("/:id",  async (req, res) => {
+    try {
+        const updatedProduct = await Product.findByIdAndUpdate(
+            req.params.id, 
+            {
+            $set: req.body
+        },
+            { new: true }
+        );
+       res.status(200).json(updatedProduct);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
+
+  //DELETE
+    router.delete("/:id", async (req, res)=>{
+    try {
+       await Product.findByIdAndDelete(req.params.id)
+       res.status(200).json("produit a été supprimé...")
+    } catch (err) {
+       res.status(500).json(err)
+    }
+    });
 
  module.exports = router;
 
@@ -78,21 +115,7 @@ router.get ("/:id", asyncHandler(async(req,res) =>{
 // }
 // });
 
-// //Update
-//   router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
-//        try {
-//            const updatedProduct = await Product.findByIdAndUpdate(
-//                req.params.id, 
-//                {
-//                $set: req.body
-//            },
-//                { new: true }
-//            );
-//           res.status(200).json(updatedProduct);
-//        } catch (err) {
-//            res.status(500).json(err);
-//        }
-//    });
+
 
 //    //DELETE
 //    router.delete("/:id", verifyTokenAndAdmin, async (req, res)=>{

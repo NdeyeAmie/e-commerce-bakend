@@ -33,15 +33,15 @@ module.exports =  generateToken;
 //          });
 //       };
 
-//      const verifyTokenAndAdmin = (req,res,next) =>{
-//         verifyToken(req, res, () =>{
-//              if (req.user.isAdmin){
-//              next();
-//             } else {
-//                 res.status(403).json("vous n'avez pas le droit de faire ca")
-//             }
-//             });
-//          };
+    //   const verifyTokenAndAdmin = (req,res,next) =>{
+    //      verifyToken(req, res, () =>{
+    //           if (req.user.isAdmin){
+    //           next();
+    //          } else {
+    //              res.status(403).json("vous n'avez pas le droit de faire ca")
+    //          }
+    //          });
+    //       };
 
 
-//    module.exports = { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin };
+    // module.exports = {verifyTokenAndAdmin };

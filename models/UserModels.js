@@ -13,5 +13,10 @@ const UserModels = [
         password:bcrypt.hashSync("123456", 10),
            
     },
+    {
+        username: "user",
+        email:"user@gmail.com",
+        password:bcrypt.hashSync("123456",10)
+    },
 ]
 module.exports= UserModels;
