@@ -9,6 +9,15 @@
          numReviews:4, 
      },
      {
+        title: "Ensembles",
+        img: "/assets/image13.png",
+        desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo accusantium, quos culpa enim quibusdam impedit provident modi ",
+        price: 10000,
+        countInStock:10,
+        rating:4,
+        numReviews:4, 
+    },
+     {
         title: "Abaya",
         img: "/assets/abaya.png",
         desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo accusantium, quos culpa enim quibusdam impedit provident modi ",

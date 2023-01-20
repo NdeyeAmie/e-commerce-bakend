@@ -7,6 +7,8 @@ const dotenv = require("dotenv");
  //const userRoute = require("./routes/user");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
+const fileupload = require ('express-fileupload');
+const path = require ("path")
 // const authRoute = require("./routes/auth");
 // const productRoute = require("./routes/product");
 // const productDetailRoute = require("./routes/productDetail");
@@ -22,16 +24,8 @@ const app = express();
 
 dotenv.config();
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, 'images/')
-    },
-    filename: (req, file, cb) => {
-      cb(null, file.originalname)
-    },
-  })
-  
-  const upload = multer({ storage: storage })
+
+
   
 // Configurer la connexion mongoose par défaut  
 // const mongoDB = "mongodb+srv://mya:w5EGjKeWSyjeY6VC@cluster0.y5vgdxc.mongodb.net/myashop?retryWrites=true&w=majority";
@@ -51,6 +45,10 @@ app.use(cors());
 app.use(express.json());
  app.use(express.urlencoded({extended: false}));
  app.use(cookieParser());
+ app.use (fileupload ({
+  useTempFiles: true,
+}))
+
 // app.use("/api/auth", authRoute);
 // app.use("/api/users", userRoute);
 // app.use("/api/products", productRoute);
@@ -81,6 +79,7 @@ const db = mongoose.connection;
 
 // Liez la connexion à l'événement d'erreur pour obtenir une notification des erreurs de connexion
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
 
 
 //product from server

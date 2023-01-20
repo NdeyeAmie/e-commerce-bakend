@@ -18,6 +18,7 @@ const protect = require("../Middleware/AuthMiddleware");
         username: user.username,
         email: user.email,
         isAdmin: user.isAdmin,
+        isUser: user.isUser,
         token: generateToken(user._id),
         createdAt: user.createdAt,
     });
@@ -49,6 +50,7 @@ res.status(201).json({
     username: user.username,
     email: user.email,
     isAdmin: user.isAdmin,
+    isUser: user.isUser,
     token: generateToken(user._id), 
 });
 }
@@ -59,8 +61,23 @@ else{
 })
 );
 
+
+router.get("/",protect,
+asyncHandler
+ (async (req, res)=>{
+             const query = req.query.new
+             try {
+             const users = query   
+             ? await User.find().sort({_id: -1}).limit(5)
+              : await User.find();
+             res.status(200).json(users);
+             } catch (err) {
+                res.status(500).json(err)
+             }
+             })
+             );
   
-  //PROFILE
+// PROFILE
   router.get("/profile",
   protect,
   asyncHandler(async(req,res) =>{
