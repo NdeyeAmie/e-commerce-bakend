@@ -50,7 +50,6 @@ res.status(201).json({
     username: user.username,
     email: user.email,
     isAdmin: user.isAdmin,
-    isUser: user.isUser,
     token: generateToken(user._id), 
 });
 }
