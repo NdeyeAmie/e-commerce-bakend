@@ -12,7 +12,7 @@ const reviewSchema = mongoose.Schema({
     comment:{
         type: Number,
         required: true,
-    },
+    }, 
     user:{
         type:mongoose.Schema.Types.ObjectId,
         require:true,
