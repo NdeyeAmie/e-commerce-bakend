@@ -31,5 +31,5 @@
   "devDependencies": {
     "nodemon": "^2.0.20"
   },
-  "proxy": "https://e-commer.onrender.com/"
+  "proxy": "https://e-commerce-gp18.onrender.com"
 }
