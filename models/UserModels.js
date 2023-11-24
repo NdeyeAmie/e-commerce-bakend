@@ -11,14 +11,14 @@ const UserModels = [
         username:"User",
         email:"user@gmail.com",
         password:bcrypt.hashSync("123456", 10),
-        isUser: true,
+       
            
     },
     {
         username: "user",
         email:"user@gmail.com",
         password:bcrypt.hashSync("123456",10),
-        isUser: true,
+       
     },
 ]
 module.exports= UserModels;
